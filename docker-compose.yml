@@ -1,0 +1,13 @@
+version: '2'
+services:
+  lgogwebui:
+    build: .
+    image: graag/lgogwebui
+    volumes:
+      - "$HOME/.cache/lgogdownloader:/home/user/.cache/lgogdownloader"
+      - "$HOME/.config/lgogdownloader:/home/user/.config/lgogdownloader"
+      - "$GOG_DIR:/home/user/GOG"
+    ports:
+      - "172.0.0.1:8585:8585"
+    environment:
+      LOCAL_USER_ID: "$UID"
