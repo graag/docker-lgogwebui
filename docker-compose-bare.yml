@@ -1,0 +1,16 @@
+version: '2.2'
+services:
+  lgogwebui:
+    build: .
+    image: graag/lgogwebui
+    container_name: lgogwebui
+    volumes:
+      - "$HOME/.cache/lgogdownloader:/home/user/.cache/lgogdownloader"
+      - "$HOME/.config/lgogdownloader:/home/user/.config/lgogdownloader"
+      - "$GOG_DIR:/home/user/GOG"
+    ports:
+      - "127.0.0.1:8585:8585"
+    network_mode: "bridge"
+    environment:
+      LOCAL_USER_ID: "$UID"
+    restart: always
