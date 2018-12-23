@@ -12,6 +12,7 @@ services:
       - lgogwebui
     environment:
       LOCAL_USER_ID: "$UID"
+      SCRIPT_NAME: "${SCRIPT_NAME:-}"
     restart: always
   web:
     image: nginx
@@ -22,7 +23,7 @@ services:
     networks:
       - lgogwebui
     ports:
-      - "${NGINX_PORT}:443"
+      - "${NGINX_PORT:-8080}:443"
     environment:
       - NGINX_HOST=$HOSTNAME
       - NGINX_PORT=$NGINX_PORT

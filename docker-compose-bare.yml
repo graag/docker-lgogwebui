@@ -13,4 +13,5 @@ services:
     network_mode: "bridge"
     environment:
       LOCAL_USER_ID: "$UID"
+      SCRIPT_NAME: "${SCRIPT_NAME:-}"
     restart: always

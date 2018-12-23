@@ -82,6 +82,30 @@ export UID
 GOG_DIR=$HOME/GOG docker-compose -f docker-compose-bare.yml up -d
 ```
 
+Proxy script_name
+==============
+
+For proxies where lgogwebui is not served as root path '/' e.g.: https://hostname/lgogwebui - additional setup is required.
+
+Either the proxy has to set X-Script-Name header. Example nginx config:
+
+```
+    location /lgogwebui {
+        proxy_pass http://127.0.0.1:8585;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Script-Name /lgogwebui;
+    }
+```
+
+Or a SCRIPT_NAME variable has to be passed to docker-compose:
+
+```
+export UID
+GOG_DIR=$HOME/GOG SCRIPT_NAME=/lgogwebui docker-compose -f docker-compose-bare.yml up -d
+```
+
 Development
 -----------
 
